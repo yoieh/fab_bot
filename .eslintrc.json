@@ -1,0 +1,15 @@
+{
+  "presets": ["es2015", "stage-2", "react"],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "no-console": "off",
+    "comma-dangle": "off",
+    "react/jsx-filename-extension": "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  }
+}
