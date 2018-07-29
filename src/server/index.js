@@ -2,11 +2,7 @@ const express = require("express");
 const os = require("os");
 const bot = require("./bot/");
 
-try {
-  bot();
-} catch (error) {
-  console.error(error);
-}
+bot();
 
 const app = express();
 
