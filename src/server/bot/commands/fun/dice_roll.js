@@ -12,9 +12,10 @@ module.exports = class DiceRollCommand extends Command {
   }
 
   async run(msg, args) {
-    var roll = Math.floor(Math.random() * 6) + 1;
+    console.log(msg, args);
+    const roll = Math.floor(Math.random() * 6) + 1;
     return msg.say(msg.member.user.username + " rolled a " + roll, {
-      tts: true
+      tts: false
     });
   }
 };

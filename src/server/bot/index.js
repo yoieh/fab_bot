@@ -1,9 +1,9 @@
 require("dotenv").config();
 
-const { CommandoClient } = require("discord.js-commando");
+const Commando = require("discord.js-commando");
 const path = require("path");
 
-const client = new CommandoClient({
+const client = new Commando.Client({
   commandPrefix: process.env.PREFIX,
   unknownCommandResponse: false,
   owner: process.env.OWNER,
@@ -21,9 +21,14 @@ const bot = () =>
 
     client.on("ready", () => {
       console.log("Logged in!");
-      client.user.setGame("Game");
+      // client.user.setGame("Game");
+      console.log(client);
+      // setInterval(function() {
+      //   for (user of client) {
+      //     console.log(user);
+      //   }
+      // }, 10000);
     });
-    client.login(process.env.TOKEN);
   });
 
 module.exports = bot;
