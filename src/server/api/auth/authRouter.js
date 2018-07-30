@@ -17,7 +17,7 @@
 module.exports = (app, passport) => {
   app.get(
     "/api/auth/discord",
-    passport.authenticate("discord", { permissions: 66321471 })
+    passport.authenticate("discord", { scope: "connections" })
   );
 
   app.get(
@@ -25,8 +25,9 @@ module.exports = (app, passport) => {
     passport.authenticate("discord", {
       failureRedirect: "/"
     }),
-    function(req, res) {
-      res.redirect("/secretstuff"); // Successful auth
+    (req, res) => {
+      console.log(req, res);
+      //res.redirect("/secretstuff"); // Successful auth
     }
   );
 
