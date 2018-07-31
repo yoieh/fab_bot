@@ -6,18 +6,24 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+const router = express.Router();
+
 app.use(express.static("dist"));
 
 /* set the bodyParser to parse the urlencoded post data */
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const pingRouter = require("./api/test/pingRouter")(app);
+const testRoute = require("./api/test")(app);
+
+app.use("/api/ping", testRoute);
 
 const authRoutesPassport = require("./api/auth/authRoutesPassport")(
   (db = null)
 );
 
 const authRouter = require("./api/auth/authRouter")(app, authRoutesPassport);
+
+app.use("/api/auth", authRouter);
 
 const server = http.createServer(app);
 

@@ -4,7 +4,7 @@ const Commando = require("discord.js-commando");
 const path = require("path");
 
 const client = new Commando.Client({
-  commandPrefix: process.env.PREFIX,
+  commandPrefix: "/fab ",
   unknownCommandResponse: false,
   owner: process.env.OWNER,
   disableEveryone: true

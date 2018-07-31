@@ -1,9 +1,9 @@
 /**
  *
- * @param app - we assign routes and endpoint functions for each route
+ * @param router - we assign routes and endpoint functions for each route
  *                  to this object.
  *
- * @param expressApp - an instance of the express app. By applying
+ * @param app     - an instance of the express app. By applying
  *                     expressApp.oauth.grant() method to an endpoint
  *                     the endpoint will return a bearer token
  *                     to the client if it provides calid credentials.
@@ -14,14 +14,19 @@
  * @return {app}
  */
 
+const express = require("express");
+const router = express.Router();
+
 module.exports = (app, passport) => {
-  app.get(
-    "/api/auth/discord",
+  router.get("/", (req, res) => res.send(200));
+
+  router.get(
+    "/discord",
     passport.authenticate("discord", { scope: "connections" })
   );
 
-  app.get(
-    "/api/auth/discord/callback",
+  router.get(
+    "/discord/callback",
     passport.authenticate("discord", {
       failureRedirect: "/"
     }),
@@ -31,5 +36,5 @@ module.exports = (app, passport) => {
     }
   );
 
-  return app;
+  return router;
 };
