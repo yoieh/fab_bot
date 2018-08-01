@@ -17,12 +17,14 @@
 const express = require("express");
 const router = express.Router();
 
+const fs = require("fs");
+
 module.exports = (app, passport) => {
   router.get("/", (req, res) => res.send(200));
 
   router.get(
     "/discord",
-    passport.authenticate("discord", { scope: "connections" })
+    passport.authenticate("discord", { scope: ["identify", "connections"] })
   );
 
   router.get(
@@ -31,8 +33,7 @@ module.exports = (app, passport) => {
       failureRedirect: "/"
     }),
     (req, res) => {
-      console.log(req, res);
-      //res.redirect("/secretstuff"); // Successful auth
+      res.redirect("/?token="); // Successful auth
     }
   );
 
