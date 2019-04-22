@@ -1,61 +1,46 @@
 const http = require("http"),
   express = require("express"),
+  morgan = require("morgan"),
   terminus = require("@godaddy/terminus"),
   bodyParser = require("body-parser"),
   cookieParser = require("cookie-parser"),
   passport = require("passport"),
   refresh = require("passport-oauth2-refresh"),
+  session = require("express-session"),
   app = express();
 
-const checkAuth = (req, res, next) => {
-  if (req.isAuthenticated()) return next();
-  res.status(200).json({ message: "not logged in :(" });
-};
+const LevelStore = require("level-session-store")(session);
 
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
+require("./config/passport")(passport);
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
+app.use(morgan("dev"));
+app.use(cookieParser());
 
-app.use(express.static("dist"));
+app.use(express.static("build"));
 
 /* set the bodyParser to parse the urlencoded post data */
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cookieParser());
 app.use(
-  require("express-session")({
+  session({
     secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: false
+    store: new LevelStore("./src/db/level-session-store"),
+    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 
-const discordStart = require("./api/auth/authRoutesPassport")(
-  passport,
-  refresh
-);
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "dist", "index.html"));
+// });
 
-refresh.use(discordStart);
-discordPassport = passport.use(discordStart);
+// refresh.use(discordStart);
+// discordPassport = passport.use(discordStart);
 
-app.get("/api/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
-});
-
-const authRouter = require("./api/auth/authRouter")(app, discordPassport);
-
-app.use("/api/auth", authRouter);
-
-const testRoute = require("./api/test")(app);
-
-app.use("/api/ping", checkAuth, testRoute);
+require("./api")(app, passport);
 
 const server = http.createServer(app);
 

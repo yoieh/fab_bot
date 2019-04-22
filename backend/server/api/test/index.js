@@ -14,13 +14,17 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = app => {
+module.exports = _ => {
   router.use((req, res, next) => {
     console.log("Ping at Time: ", Date.now());
     next();
   });
 
   router.get("/", (req, res) => {
+    return res.status(200).json({ message: "pong!" });
+  });
+
+  router.get("/ping", (req, res) => {
     return res.status(200).json({ message: "pong!" });
   });
 
