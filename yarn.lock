@@ -8,9 +8,9 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@godaddy/terminus@^2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-2.4.1.tgz#db94aac977089b68636f477cdbce9102e5df8fbc"
+"@godaddy/terminus@^4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-4.3.1.tgz#20bc24271df373ae362b3948c9dd95d22736b5c2"
   dependencies:
     es6-promisify "^6.0.0"
     stoppable "^1.0.5"
@@ -3132,7 +3132,7 @@ event-emitter@~0.3.5:
 
 event-stream@~3.3.0:
   version "3.3.4"
-  resolved "http://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
+  resolved "https://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
   dependencies:
     duplexer "~0.1.1"
     from "~0"
