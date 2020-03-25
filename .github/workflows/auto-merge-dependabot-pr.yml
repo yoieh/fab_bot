@@ -1,5 +1,3 @@
-auto-merge-dependabot-pr.yml
-
 name: Auto merge dependabot pr 
 
 on:
